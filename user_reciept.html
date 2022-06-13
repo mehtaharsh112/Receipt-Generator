@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipt Generator</title>
+    <style>
+        .d-flex {
+            display: flex;
+            justify-content: center;
+        }
+
+        #center
+        {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #del
+        {
+            border: 0;
+            padding: 10px 50px;
+            color: lightblue;
+            background-color: green;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .button {
+            border: none;
+            text-align: center;
+            font-size: 50px;
+        }
+
+        .plus {
+            background-color: #8586BA;
+            color: white;
+            cursor: pointer;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            cursor: pointer;
+        }
+
+        .minus {
+            background-color: #8586BA;
+            color: white;
+            cursor: pointer;
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+            cursor: pointer;
+        }
+
+        .radar {
+            background-color: #E67A39;
+            color: white;
+        }
+
+        .padding {
+            padding: 10px 100px;
+        }
+
+        .plus:hover {
+            background-color: #CED1D5;
+            color: black;
+        }
+
+        .minus:hover {
+            background-color: #CED1D5;
+            color: black;
+        }
+
+        .note {
+            color: red;
+            background-color: yellow;
+            font-size: 40px;
+            text-align: center;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: auto auto;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .margin-left {
+            margin-left: 50px;
+        }
+
+        .grid button {
+            border: 0;
+            background-color: #274140;
+            color: #ADDBD9;
+            padding: 10px 50px;
+            font-size: 20px;
+            border-radius: 20px;
+        }
+
+        .grid button:hover {
+            color: #274140;
+            background-color: #ADDBD9;
+            cursor: pointer;
+        }
+
+        #cal {
+            display: none;
+            color: #98EFE4;
+            background-color: #008165;
+            font-size: 30px;
+            text-align: center;
+            padding: 30px 0;
+            margin-left: 500px;
+            margin-right: 500px;
+        }
+
+        .grid-two {
+            display: grid;
+            grid-template-columns: auto auto auto;
+            margin: 0px 50px;
+            background-color: lightcoral;
+            padding: 50px;
+            border-radius: 20px;
+        }
+
+        .margin-x {
+            margin: 0 50px;
+        }
+
+        .margin-y {
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+
+        #user-info h1 {
+            color: #CFE5FF;
+            background-color: #7C1034;
+            text-align: center;
+        }
+
+        #user-info {
+            display: none;
+            background-color: rgb(85, 85, 85);
+        }
+
+        input {
+            border: 0;
+            background-color: #123A5D;
+            color: wheat;
+            padding: 10px 50px;
+            border-radius: 20px;
+        }
+
+        ::placeholder {
+            color: white;
+        }
+
+        input:focus {
+            outline: 0;
+        }
+
+        .btn-two {
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            margin: 20px 500px;
+            padding: 10px 50px;
+            background-color: #605B83;
+            color: #CAD5AC;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .btn-two:hover {
+            color: #605B83;
+            background-color: #CAD5AC;
+        }
+
+        .d-flex-two {
+            display: flex;
+            justify-content: center;
+            justify-content: space-between;
+        }
+
+        .d-flex-two p {
+            /* background-color: #817050; */
+            /* color: #E7D8D0; */
+            color: black;
+            padding: 20px;
+            width: 200px;
+        }
+
+        #receipt
+        {
+            display: none;
+            /* margin: 0 500px; */
+            /* background-color: lightcoral; */
+            padding: 50px;
+            border-radius: 20px;
+            border: 2px solid black;
+        }
+
+        /* @media only screen and (max-width: 1200px)
+        {
+            .grid
+            {
+                display: grid;
+                grid-template-columns: auto;
+            }
+            .grid-two
+            {
+                display: grid;
+                grid-template-columns: auto;
+            }
+        } */
+
+    </style>
+</head>
+
+<body>
+    <!-- <marquee scrollamount="30"><p class="note">Note : Each items cost of 500$</p></marquee> -->
+    <div class="button d-flex">
+        <p class="plus padding" onclick="return incre()">+</p>
+        <p class="radar padding" id="radar">0</p>
+        <p class="minus padding" onclick="return decre()">-</p>
+    </div>
+
+    <div class="grid">
+        <button onclick="return cal()">Total Price</button>
+        <button class="margin-left" onclick="return order()">Confirm Order</button>
+    </div>
+    <p id="cal"></p>
+    <div id="user-info">
+        <h1>User-Info</h1>
+        <div class="grid-two">
+            <input type="text" placeholder="Name" id="fname">
+            <input type="number" placeholder="Age" class="margin-x" id="fage">
+            <input type="number" placeholder="Mobile Number" id="fnum">
+            <input type="email" placeholder="Email id" class="margin-y" id="femail">
+            <input type="text" placeholder="item 1" class="margin-x margin-y" id="fitem-one">
+            <input type="text" placeholder="item 2" class="margin-y" id="fitem-two">
+            <input type="text" placeholder="item 3" id="fitem-three">
+            <input type="text" placeholder="Address" class="margin-x" id="fadd">
+            <input type="text" placeholder="Payment Method" id="fpay">
+        </div>
+        <button class="btn-two" onclick="return receipt()">Generate Receipt</button>
+    </div>
+    <p id="error"></p>
+    <div id="receipt">
+        <h1 id="userrec"></h1>
+        <div class="d-flex-two">
+            <p id="rname"></p>
+            <p id="rage"></p>
+            <p id="rnum"></p>
+        </div>
+        <div class="d-flex-two">
+            <p id="remail"></p>
+            <p id="ritem-one"></p>
+            <p id="ritem-two"></p>
+        </div>
+        <div class="d-flex-two">
+            <p id="ritem-three"></p>
+            <p id="radd"></p>
+            <p id="rpay"></p>
+        </div>
+        <div class="d-flex-two">
+            <p id="date"></p>
+            <p id="ramount"></p>
+            <p id="rpay"></p>
+        </div>
+    </div>
+    <!-- <div id="center">
+        <button id="del" onclick="return del()">REMOVE</button>
+    </div> -->
+    <script>
+        var count = 0;
+        var a = document.getElementById('cal');
+        var plus = document.getElementById('radar');
+        var minus = document.getElementById('radar');
+        var b = document.getElementById('user-info');
+        var c = document.getElementById('receipt');
+        var d = document.getElementById('error')
+        function incre() {
+            // plus.innerHTML = count;
+            count++;
+            plus.innerHTML = count;
+            var count2 = count * 500;
+            a.style.display = 'block';
+            a.innerHTML = count2 + "$";
+            // d.style.display='none'
+        }
+        function decre() {
+            // minus.innerHTML = count;
+            count--;
+            plus.innerHTML = count;
+            var count2 = count * 500;
+            a.style.display = 'block';
+            a.innerHTML = count2 + "$";
+            d.style.display='none'
+        }
+        function cal() {
+            b.style.display = 'none';
+            var count2 = count * 500;
+            a.style.display = 'block';
+            a.innerHTML = count2 + "$";
+        }
+        function order() {
+            a.style.display = 'none';
+            
+            if(count>5)
+            {
+                b.style.display = 'none';
+                d.innerHTML="Item Not Available"
+                d.style.color='red'
+                d.style.backgroundColor='yellow'
+                d.style.textAlign='center'
+                d.style.fontSize='20px'
+            }
+            else
+            {
+                d.style.display='none'
+                b.style.display = 'grid';
+            }
+        }
+        function receipt() {
+            var fname = document.getElementById('fname').value;
+            var fage = document.getElementById('fage').value;
+            var fnum = document.getElementById('fnum').value;
+            var femail = document.getElementById('femail').value;
+            var fitemOne = document.getElementById('fitem-one').value;
+             var fitemTwo = document.getElementById('fitem-two').value;
+             var fitemThree = document.getElementById('fitem-three').value;
+             var fadd = document.getElementById('fadd').value;
+             var fpay = document.getElementById('fpay').value;
+
+
+            a.style.display = 'none';
+            b.style.display = 'none';
+            c.style.display = 'block';
+            var user = document.getElementById('userrec')
+            user.innerHTML=`${fname}'s receipt is generated successfully`
+            user.style.textAlign='center'
+            user.style.fontSize='30px'
+            user.style.color='silver'
+            user.style.backgroundColor='black'
+            user.style.padding='10px 50px'
+            // console.log(fname)
+            document.getElementById('rname').innerHTML=`Name : ${fname}`
+            document.getElementById('rage').innerHTML=`Age : ${fage}`
+            document.getElementById('rnum').innerHTML=`Moble Number : ${fnum}`
+            document.getElementById('remail').innerHTML=`Email : ${femail}`
+            document.getElementById('ritem-one').innerHTML=`Item 1 : ${fitemOne}`
+            document.getElementById('ritem-two').innerHTML=`Item 2: ${fitemTwo}`
+            document.getElementById('ritem-three').innerHTML=`Item 3 : ${fitemThree}`
+            document.getElementById('radd').innerHTML=`Address : ${fadd}`
+            document.getElementById('rpay').innerHTML=`Payment Method : ${fpay}`
+            document.getElementById('date').innerHTML= `Date of Shipping : ${new Date()}`
+            document.getElementById('ramount').innerHTML=count2;
+        }
+
+        // function del()
+        // {
+        //    var rec = document.getElementsById('receipt')
+        //    rec.style.display='block'
+        //    rec.style.display='none'
+        // }
+    </script>
+</body>
+
+</html>
